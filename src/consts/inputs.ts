@@ -2,6 +2,7 @@ import { InputProps } from '../types/Input';
 
 const ATTRIBUTES_INPUTS: Array<InputProps> = [
   {
+    label: 'Email',
     id: crypto.randomUUID(),
     type: 'email',
     title: 'Debes ingresar un email válido',
@@ -9,6 +10,7 @@ const ATTRIBUTES_INPUTS: Array<InputProps> = [
     pattern: '{10}',
   },
   {
+    label: 'Asunto',
     id: crypto.randomUUID(),
     type: 'text',
     title: 'Debes ingresar un asunto',
@@ -16,6 +18,7 @@ const ATTRIBUTES_INPUTS: Array<InputProps> = [
     pattern: '{10}',
   },
   {
+    label: 'Mensaje',
     id: crypto.randomUUID(),
     type: 'text',
     title: 'Debes ingresar un mensaje',
