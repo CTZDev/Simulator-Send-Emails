@@ -5,8 +5,8 @@ interface Props {
 const FormEmail: React.FC<Props> = ({ children }) => {
   return (
     <>
-      <h2 className='text-center text-balance text-4xl p-12 font-semibold'>
-        Enviar emails
+      <h2 className='text-center text-balance text-3xl p-8 font-semibold text-clr-primary md:text-5xl md:p-16'>
+        Enviar emails 📧
       </h2>
       {children}
     </>
