@@ -3,20 +3,21 @@ import Input from './Input';
 
 const Inputs: React.FC = () => {
   return (
-    <>
-      {ATTRIBUTES_INPUTS.map(({ id, type, title, placeholder, pattern }) => (
-        <>
+    <main className='max-w-[768px] m-auto px-16 py-14 text-sm flex flex-col gap-6 rounded-xl shadow-2xl shadow-black bg-white md:text-base'>
+      {ATTRIBUTES_INPUTS.map(
+        ({ label, id, type, title, placeholder, pattern }) => (
           <Input
-            id={id}
             key={id}
+            label={label}
+            id={id}
             type={type}
             title={title}
             placeholder={placeholder}
             pattern={pattern}
           />
-        </>
-      ))}
-    </>
+        )
+      )}
+    </main>
   );
 };
 
