@@ -7,7 +7,8 @@ const ATTRIBUTES_INPUTS: Array<InputProps> = [
     type: 'email',
     title: 'Debes ingresar un email válido',
     placeholder: 'Ingresa tu email: carlosteran@gmail.com',
-    pattern: '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$',
+    pattern:
+      '^[a-z0-9]+(\\.[_a-z0-9]+)*@[a-z0-9\\-]+(\\.[a-z0-9\\-]+)*(\\.[a-z]{2,15})$',
   },
   {
     label: 'Asunto',

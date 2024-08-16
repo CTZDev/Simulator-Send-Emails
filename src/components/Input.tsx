@@ -12,33 +12,29 @@ const Input: React.FC<Props> = ({
   const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    const pattern = new RegExp(e.target.pattern);
-
-    if (type === 'email' && newValue.length > 0 && !pattern.test(newValue)) {
-      return setError(title);
-    }
-
-    if (type === 'text' && !pattern.test(newValue)) {
-      return setError(title);
-    }
+    const current = e.target;
+    const newValue = current.value;
+    const pattern = new RegExp(current.pattern, 'gi');
+    if (!pattern.test(newValue)) return setError(current.title);
 
     return setError('');
   };
 
   return (
     <div className='form-control flex flex-col text-clr-primary'>
-      <label htmlFor={id} className='font-semibold pb-2.5'>
+      <label htmlFor={id} className='font-semibold pb-2.5 w-min'>
         {label}:{' '}
       </label>
       <input
-        className='px-4 py-2 border-2 border-slate-200 rounded-xl text-clr-secondary font-normal focus:outline-none focus:border-clr-info focus:border-2'
+        className={`px-4 py-2 border-2 border-slate-200 rounded-xl text-clr-secondary font-normal outline-none
+    focus:border-clr-info focus:border-2 valid:border-clr-success focus:invalid:border-clr-error`}
         name={id}
         id={id}
         type={type}
         title={title}
         placeholder={placeholder}
         pattern={pattern}
+        required
         onChange={handleChange}
       />
       {error && (
