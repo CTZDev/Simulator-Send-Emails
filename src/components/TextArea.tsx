@@ -15,26 +15,26 @@ const TextArea: React.FC<Props> = ({
     const pattern = e.target.dataset.pattern;
     const regex = pattern && new RegExp(pattern);
 
-    if (regex && !regex.test(newValue)) {
-      return setError(title);
-    }
+    if (regex && !regex.test(newValue)) return setError(title);
 
     setError('');
   };
 
   return (
     <div className='form-control flex flex-col text-clr-primary'>
-      <label htmlFor={id} className='font-semibold pb-2.5'>
+      <label htmlFor={id} className='font-semibold pb-2.5 w-min'>
         {label}:{' '}
       </label>
       <textarea
-        className='px-4 py-2 border-2 border-slate-200 rounded-lg text-clr-secondary font-normal resize-none focus:outline-none focus:border-clr-info focus:border-2'
+        className='px-4 py-2 border-2 border-slate-200 rounded-lg text-clr-secondary font-normal resize-none outline-none
+        focus:border-clr-info focus:border-2 valid:border-clr-success focus:invalid:border-clr-error'
         name={id}
         id={id}
         title={title}
         placeholder={placeholder}
         rows={5}
         data-pattern={pattern}
+        required
         onChange={handleChange}></textarea>
 
       {error && (

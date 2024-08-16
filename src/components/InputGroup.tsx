@@ -5,7 +5,7 @@ import TextArea from './TextArea';
 
 const InputGroup: React.FC = () => {
   return (
-    <form className='max-w-[768px] m-auto px-16 py-14 text-sm flex flex-col gap-6 rounded-xl shadow-2xl shadow-black bg-white md:text-base'>
+    <div className='flex flex-col gap-6 mb-6'>
       {/* Section of Inputs */}
       {ATTRIBUTES_INPUTS.map(
         ({ label, id, type, title, placeholder, pattern }) => (
@@ -32,7 +32,7 @@ const InputGroup: React.FC = () => {
           pattern={pattern}
         />
       ))}
-    </form>
+    </div>
   );
 };
 
