@@ -9,6 +9,7 @@ const ButtonGroup: React.FC = () => {
         className='bg-clr-info text-white'
         key={'1'}
         content='Send'
+        imageIcon={{ src: './send.svg', alt: 'Send email' }}
       />
       <Button
         id={'2'}
@@ -16,6 +17,7 @@ const ButtonGroup: React.FC = () => {
         className='bg-clr-error text-white'
         key={'2'}
         content='Reset'
+        imageIcon={{ src: './refresh.svg', alt: 'Refresh fields' }}
       />
     </div>
   );
