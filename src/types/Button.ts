@@ -1,3 +1,5 @@
+import { ImageIconPros } from './Image';
+
 type TypeProps = {
   type: 'button' | 'submit' | 'reset';
 };
@@ -7,4 +9,5 @@ export interface ButttonProps {
   className?: string;
   type: TypeProps['type'];
   content: string;
+  imageIcon?: ImageIconPros;
 }
