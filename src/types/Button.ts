@@ -9,5 +9,6 @@ export interface ButttonProps {
   className?: string;
   type: TypeProps['type'];
   content: string;
+  disabled?: boolean;
   imageIcon?: ImageIconPros;
 }

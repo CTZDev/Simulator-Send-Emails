@@ -1,15 +1,22 @@
 import Button from './Button';
 
-const ButtonGroup: React.FC = () => {
+interface ButtonGroupProps {
+  isFormValid: boolean;
+}
+
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ isFormValid }) => {
   return (
     <div className='flex gap-2.5 justify-center'>
       <Button
         id={'1'}
         type={'submit'}
-        className='bg-clr-info text-white'
         key={'1'}
         content='Send'
+        className={`bg-clr-info text-white ${
+          isFormValid ? '' : 'cursor-not-allowed'
+        }`}
         imageIcon={{ src: './send.svg', alt: 'Send email' }}
+        disabled={!isFormValid}
       />
       <Button
         id={'2'}

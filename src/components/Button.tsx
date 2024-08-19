@@ -7,13 +7,20 @@ const Button: React.FC<Props> = ({
   content,
   className,
   imageIcon,
+  disabled,
 }) => {
+  const classButtonDisabled = 'bg-slate-300 text-white';
+
   return (
     <button
       type={type}
       id={id}
-      className={`${className} p-2.5 w-44 border rounded-lg text-base font-semibold flex items-center justify-center gap-2.5 transition hover:scale-[1.025] md:text-lg`}
-      value={type.charAt(0).toUpperCase().concat(type.slice(1))}>
+      className={`${className} p-2.5 w-44 border rounded-lg text-base font-semibold flex items-center justify-center gap-2.5
+      transition hover:scale-[1.025] md:text-lg ${
+        disabled && classButtonDisabled
+      }`}
+      value={type.charAt(0).toUpperCase().concat(type.slice(1))}
+      disabled={disabled}>
       {imageIcon && (
         <Image src={imageIcon.src} alt={imageIcon.alt} width={28} height={28} />
       )}
