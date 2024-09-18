@@ -2,15 +2,18 @@ import Button from './Button';
 
 interface ButtonGroupProps {
   isFormValid: boolean;
+  resetFields?: () => void;
 }
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ isFormValid }) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
+  isFormValid,
+  resetFields,
+}) => {
   return (
     <div className='flex gap-2.5 justify-center'>
       <Button
-        id={'1'}
+        id={'btnSend'}
         type={'submit'}
-        key={'1'}
         content='Send'
         className={`bg-clr-info text-white ${
           isFormValid ? '' : 'cursor-not-allowed'
@@ -18,13 +21,14 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ isFormValid }) => {
         imageIcon={{ src: './send.svg', alt: 'Send email' }}
         disabled={!isFormValid}
       />
+
       <Button
-        id={'2'}
-        type={'reset'}
+        id={'btnReset'}
+        type={'button'}
         className='bg-clr-error text-white'
-        key={'2'}
         content='Reset'
         imageIcon={{ src: './refresh.svg', alt: 'Refresh fields' }}
+        onClick={resetFields}
       />
     </div>
   );
