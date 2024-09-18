@@ -9,15 +9,18 @@ const Input: React.FC<Props> = ({
   placeholder,
   pattern,
 }) => {
+  const [value, setValue] = useState('');
   const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const current = e.target;
     const newValue = current.value;
-    const pattern = new RegExp(current.pattern, 'gi');
-    if (!pattern.test(newValue)) return setError(current.title);
+    const patternRegex = new RegExp(current.pattern, 'gi');
 
-    return setError('');
+    if (!patternRegex.test(newValue)) setError(current.title);
+    else setError('');
+
+    setValue(newValue);
   };
 
   return (
@@ -25,20 +28,26 @@ const Input: React.FC<Props> = ({
       <label htmlFor={id} className='font-semibold pb-2.5 w-min'>
         {label}:{' '}
       </label>
+
       <input
-        className={`px-4 py-2 border-2 border-slate-200 rounded-xl text-clr-secondary font-normal outline-none
-    focus:border-clr-info focus:border-2 valid:border-clr-success focus:invalid:border-clr-error`}
-        name={id}
+        className={`form-input px-4 py-2 border-2 border-slate-200 rounded-xl text-clr-secondary font-normal outline-none
+          focus:border-clr-info focus:border-2 ${
+            error
+              ? 'valid:border-clr-success focus:invalid:border-clr-error'
+              : ''
+          }`}
         id={id}
         type={type}
         title={title}
         placeholder={placeholder}
         pattern={pattern}
         required
+        value={value}
         onChange={handleChange}
       />
+
       {error && (
-        <span className='text-white p-1.5 bg-clr-error font-semibold text-center mt-1.5'>
+        <span className='form-error text-white p-1.5 bg-clr-error font-semibold text-center mt-1.5'>
           {error}
         </span>
       )}
