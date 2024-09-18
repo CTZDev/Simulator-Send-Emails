@@ -8,6 +8,7 @@ const Button: React.FC<Props> = ({
   className,
   imageIcon,
   disabled,
+  onClick,
 }) => {
   const classButtonDisabled = 'bg-slate-300 text-white';
 
@@ -20,7 +21,8 @@ const Button: React.FC<Props> = ({
         disabled && classButtonDisabled
       }`}
       value={type.charAt(0).toUpperCase().concat(type.slice(1))}
-      disabled={disabled}>
+      disabled={disabled}
+      onClick={onClick}>
       {imageIcon && (
         <Image src={imageIcon.src} alt={imageIcon.alt} width={28} height={28} />
       )}
