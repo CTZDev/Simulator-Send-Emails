@@ -11,4 +11,5 @@ export interface ButttonProps {
   content: string;
   disabled?: boolean;
   imageIcon?: ImageIconPros;
+  onClick?: () => void;
 }
