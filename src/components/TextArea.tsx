@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { TextAreaProps as Props } from '../types/Textarea';
+import { useFormContext } from '../hooks/formContext';
 
 const TextArea: React.FC<Props> = ({
   id,
@@ -8,16 +8,22 @@ const TextArea: React.FC<Props> = ({
   placeholder,
   pattern,
 }) => {
-  const [error, setError] = useState('');
+  const { inputValues, inputErrors, setInputValue, setInputError } =
+    useFormContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value;
-    const pattern = e.target.dataset.pattern;
-    const regex = pattern && new RegExp(pattern);
+    const current = e.target;
+    const newValue = current.value;
+    const pattern = current.dataset.pattern;
+    const patternRegex = pattern && new RegExp(pattern);
 
-    if (regex && !regex.test(newValue)) return setError(title);
+    if (patternRegex && !patternRegex.test(newValue)) {
+      setInputError(id, title);
+    } else {
+      setInputError(id, '');
+    }
 
-    setError('');
+    setInputValue(id, newValue);
   };
 
   return (
@@ -28,18 +34,18 @@ const TextArea: React.FC<Props> = ({
       <textarea
         className='px-4 py-2 border-2 border-slate-200 rounded-lg text-clr-secondary font-normal resize-none outline-none
         focus:border-clr-info focus:border-2 valid:border-clr-success focus:invalid:border-clr-error'
-        name={id}
         id={id}
         title={title}
         placeholder={placeholder}
         rows={5}
         data-pattern={pattern}
         required
+        value={inputValues[id] || ''}
         onChange={handleChange}></textarea>
 
-      {error && (
-        <span className='text-white p-1.5 bg-clr-error font-semibold text-center mt-1.5'>
-          {error}
+      {inputErrors[id] && (
+        <span className='form-error text-white p-1.5 bg-clr-error font-semibold text-center mt-1.5'>
+          {inputErrors[id]}
         </span>
       )}
     </div>
