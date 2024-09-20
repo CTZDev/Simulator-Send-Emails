@@ -1,14 +1,13 @@
+import { useFormContext } from '../hooks/formContext';
 import Button from './Button';
 
 interface ButtonGroupProps {
   isFormValid: boolean;
-  resetFields?: () => void;
 }
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  isFormValid,
-  resetFields,
-}) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ isFormValid }) => {
+  const { resetForm } = useFormContext();
+
   return (
     <div className='flex gap-2.5 justify-center'>
       <Button
@@ -28,7 +27,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
         className='bg-clr-error text-white'
         content='Reset'
         imageIcon={{ src: './refresh.svg', alt: 'Refresh fields' }}
-        onClick={resetFields}
+        onClick={resetForm}
       />
     </div>
   );
