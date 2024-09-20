@@ -1,20 +1,15 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  type ReactElement,
-} from 'react';
-import { useEffect, useRef, useState } from 'react';
-import ButtonGroup from './ButtonGroup';
+import { useRef } from 'react';
 import Swal from 'sweetalert2';
+import { useFormContext } from '../hooks/formContext';
 
 interface Props {
   children: React.ReactNode;
+  setIsFormValid: (isFormValid: boolean) => void;
 }
 
-const FormEmail: React.FC<Props> = ({ children }) => {
-  const [isFormValid, setIsFormValid] = useState(false);
+const FormEmail: React.FC<Props> = ({ children, setIsFormValid }) => {
   const formRef = useRef<HTMLFormElement>(null);
+  const { resetForm } = useFormContext();
 
   const checkFormValidity = () => {
     if (formRef.current) {
@@ -27,27 +22,21 @@ const FormEmail: React.FC<Props> = ({ children }) => {
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isFormValid) {
+    if (e.currentTarget.checkValidity()) {
       Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Your e-mail has been sent successfully',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1200,
       }).then(() => {
         if (formRef.current) {
-          formRef.current.reset(); // Limpiar los campos del formulario
-          setIsFormValid(false); // Deshabilitar el botón nuevamente
-          // Forzar una actualización de la validez después del reinicio
-          checkFormValidity(); // Revalidar el formulario después de reiniciar
+          resetForm();
+          setIsFormValid(false);
         }
       });
     }
   };
-
-  useEffect(() => {
-    checkFormValidity(); // Verificar validez al cargar el componente
-  }, []);
 
   return (
     <>
@@ -59,17 +48,9 @@ const FormEmail: React.FC<Props> = ({ children }) => {
         method='POST'
         ref={formRef}
         onSubmit={sendEmail}
-        onChange={checkFormValidity} // Verificar validez en tiempo real
+        onChange={checkFormValidity}
         className='max-w-[768px] m-auto px-16 py-14 text-sm rounded-xl shadow-2xl shadow-black bg-white md:text-base'>
-        {Children.map(children, (child) => {
-          if (isValidElement(child) && child.type === ButtonGroup) {
-            return cloneElement(
-              child as ReactElement<{ isFormValid: boolean }>,
-              { isFormValid }
-            );
-          }
-          return child;
-        })}
+        {children}
       </form>
     </>
   );
